@@ -8,4 +8,4 @@ void translator() {
   googleTranslator.translate(text, to: "ru").then((value) {
     text = value.toString();
   });
-}
+}//GoogleTranslator

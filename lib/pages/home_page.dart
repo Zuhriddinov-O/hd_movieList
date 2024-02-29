@@ -24,10 +24,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Cache cache = CacheManagerImpl();
   bool _iconIsActive = false;
+  List<AllFilms> _foundUsers = [];
 
   @override
   void initState() {
     _getTheme();
+    _foundUsers = allFilmsList;
     super.initState();
   }
 
@@ -36,6 +38,19 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
+  void _runFilter(String query) {
+    List<AllFilms> results = [];
+    if (query.isEmpty) {
+      results = allFilmsList;
+    }
+    else {
+      results =
+          allFilmsList.where((element) => element.names.toLowerCase().contains(query.toLowerCase())).toList();
+    }
+    setState(() {
+      _foundUsers = results;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,8 +69,12 @@ class _HomePageState extends State<HomePage> {
           ),
           title: _iconIsActive == true
               ? TextField(
+                  style: TextStyle(color: CupertinoColors.white),
+                  cursorErrorColor: Colors.red,
                   cursorColor: Colors.white,
-                  onTap: () {},
+                  onChanged: (value) {
+                    _runFilter(value);
+                  },
                   textCapitalization: TextCapitalization.sentences,
                   textInputAction: TextInputAction.search,
                   undoController: UndoHistoryController())
@@ -72,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                     : const Icon(CupertinoIcons.search, color: Colors.white))
           ]),
       drawer: drawer(),
-      body: Padding(
+      body:context==null?Text("Nothing has Found",style: TextStyle(fontSize: 50,color: CupertinoColors.white),): Padding(
         padding: const EdgeInsets.only(left: 8, right: 8),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -82,10 +101,10 @@ class _HomePageState extends State<HomePage> {
             mainAxisSpacing: 12,
             mainAxisExtent: 260,
           ),
-          itemCount: allFilmsList.length,
+          itemCount: _foundUsers.length,
           itemBuilder: (context, index) {
             final filmDescIndex = filmDesc[index];
-            final allFilms = allFilmsList[index];
+            final allFilms = _foundUsers[index];
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                         child: Stack(
                           children: [
                             Image.network(
-                              allFilmsList[filmDescIndex.id].images,
+                              _foundUsers[filmDescIndex.id].images,
                               fit: BoxFit.fill,
                               height: 200,
                             ),
@@ -130,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(2.0),
                                   child: Text(
-                                    allFilmsList[filmDescIndex.id].ratings.toString(),
+                                    _foundUsers[filmDescIndex.id].ratings.toString(),
                                     style: const TextStyle(color: Colors.white70, fontSize: 12),
                                     selectionColor: Colors.purple,
                                   ),
@@ -145,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   //allFilmsList[index].names filmDescni id siga moslab
-                  allFilmsList[filmDescIndex.id].names,
+                  _foundUsers[filmDescIndex.id].names,
                   style: TextStyle(color: widget.switchIsActive ? Colors.yellow[900] : Colors.yellow),
                   overflow: TextOverflow
                       .ellipsis, //allFilmListni ichidegi isimlarni qaytar qaysiki filmDescni=>(id)siga moslab
@@ -310,7 +329,16 @@ class _HomePageState extends State<HomePage> {
               style: ListTileStyle.drawer,
               title: RichText(
                   text: const TextSpan(
-                children: [TextSpan(text: "Data from",style: TextStyle(color: Colors.white70),), TextSpan(text: "\nStructured Class",style: TextStyle(color: Colors.white70),)],
+                children: [
+                  TextSpan(
+                    text: "Data from",
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  TextSpan(
+                    text: "\nStructured Class",
+                    style: TextStyle(color: Colors.white70),
+                  )
+                ],
               )),
             ),
           ),
@@ -319,5 +347,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-//ask how to share variables to other pages//
-//learn to make url text to pass the Logos//

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 
 class Settings extends StatefulWidget {
@@ -102,10 +103,17 @@ class _SettingsState extends State<Settings> {
                                             ],
                                           )
                                         ],
-                                        title: Container(
-                                            color: Colors.blueGrey,
-                                            width: MediaQuery.of(context).size.width,
-                                            height: MediaQuery.of(context).size.height/2,child: Image.asset("assets/images/movieLogo.png",filterQuality: FilterQuality.high)));
+                                        title: Banner(
+                                          message: 'HD Movie List+',
+                                          location: BannerLocation.topEnd,
+                                          color: Colors.blueGrey.shade200,
+                                          child: Container(
+                                              decoration: BoxDecoration(backgroundBlendMode: BlendMode.clear,borderRadius: BorderRadius.circular(10),
+                                              color: Colors.blueGrey,
+                                              ),
+                                              width: MediaQuery.of(context).size.width,
+                                              height: MediaQuery.of(context).size.height/2,child: Image.asset("assets/images/movieLogo.png",filterQuality: FilterQuality.high)),
+                                        ));
                                   },
                                 );
                               },

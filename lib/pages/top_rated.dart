@@ -32,7 +32,7 @@ class _TopRatedState extends State<TopRated> {
     return Scaffold(
       backgroundColor: widget.sValue ? Colors.white : null,
       appBar: AppBar(
-        backgroundColor: widget.sValue ? Colors.red : null,
+        backgroundColor: widget.sValue ? Color(0xFFFF0000) : null,
         title: TextButton(
             onPressed: () {
               setState(() {
@@ -119,7 +119,7 @@ class _TopRatedState extends State<TopRated> {
                   Text(
                     //allFilmsList[index].names filmDescni id siga moslab
                     allFilmsList[filmDes.id].names,
-                    style: const TextStyle(color: Colors.yellow),
+                    style: TextStyle(color: widget.sValue?Colors.yellow[900]:Colors.yellow),
                     overflow: TextOverflow
                         .ellipsis, //allFilmListni ichidegi isimlarni qaytar qaysiki filmDescni=>(id)siga moslab
                   )

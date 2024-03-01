@@ -52,7 +52,7 @@ class _CartoonScreenDetailsState extends State<CartoonScreenDetails> {
     return Scaffold(
       backgroundColor: widget.sValue ? Colors.white : null,
       appBar: AppBar(
-          backgroundColor: widget.sValue ? Colors.red : null,
+          backgroundColor: widget.sValue ? Color(0xFFFF0000) : null,
           title: TextButton(
             onPressed: () {
               setState(() {

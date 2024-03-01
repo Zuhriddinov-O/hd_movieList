@@ -6,8 +6,10 @@ import 'package:portfolio_01/pages/war_screen_details.dart';
 import 'package:translator/translator.dart';
 
 class WarScreen extends StatefulWidget {
-  WarScreen({super.key,required this.sValue});
+  WarScreen({super.key, required this.sValue});
+
   bool sValue;
+
   @override
   State<WarScreen> createState() => _WarScreenState();
 }
@@ -29,14 +31,14 @@ class _WarScreenState extends State<WarScreen> {
     return Scaffold(
       backgroundColor: widget.sValue ? Colors.white : null,
       appBar: AppBar(
-        backgroundColor: widget.sValue ? Colors.red : null,
-        title:  TextButton(
+        backgroundColor: widget.sValue ? Color(0xFFFF0000) : null,
+        title: TextButton(
           onPressed: () {
             setState(() {
               translate();
             });
           },
-          child: Text(categories,style: TextStyle(fontSize: 23,color: CupertinoColors.white)),
+          child: Text(categories, style: TextStyle(fontSize: 23, color: CupertinoColors.white)),
         ),
       ),
       body: SizedBox(
@@ -73,7 +75,8 @@ class _WarScreenState extends State<WarScreen> {
                                 return WarScreenDetails(
                                   sValue: widget.sValue,
                                   war: warDetails[index],
-                                  warCategory: warCategory[index], switchIsActive: true,
+                                  warCategory: warCategory[index],
+                                  switchIsActive: true,
                                 );
                               },
                             ),
@@ -93,21 +96,15 @@ class _WarScreenState extends State<WarScreen> {
                                 child: Container(
                                   decoration: const BoxDecoration(
                                     //luminosity///difference
-                                    backgroundBlendMode:
-                                        BlendMode.luminosity,
-                                    borderRadius: BorderRadius.only(
-                                        bottomRight: Radius.circular(15)),
+                                    backgroundBlendMode: BlendMode.luminosity,
+                                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(15)),
                                     color: Colors.blue,
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
                                     child: Text(
-                                      warCategory[warDescIndex.id]
-                                          .ratings
-                                          .toString(),
-                                      style: const TextStyle(
-                                          color: Colors.white70,
-                                          fontSize: 12),
+                                      warCategory[warDescIndex.id].ratings.toString(),
+                                      style: const TextStyle(color: Colors.white70, fontSize: 12),
                                       selectionColor: Colors.purple,
                                     ),
                                   ),
@@ -122,7 +119,7 @@ class _WarScreenState extends State<WarScreen> {
                   Text(
                     //allFilmsList[index].names filmDescni id siga moslab
                     warCategory[warDescIndex.id].names,
-                    style: TextStyle(color:widget.sValue ? Colors.yellow[900] : Colors.yellow),
+                    style: TextStyle(color: widget.sValue ? Colors.yellow[900] : Colors.yellow),
                     overflow: TextOverflow
                         .ellipsis, //allFilmListni ichidegi isimlarni qaytar qaysiki filmDescni=>(id)siga moslab
                   )

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 
 class Settings extends StatefulWidget {
@@ -19,7 +18,7 @@ class _SettingsState extends State<Settings> {
         backgroundColor: widget.sValue ? Colors.white : null,
         appBar: AppBar(
           title: const Text("Settings"),
-          backgroundColor: widget.sValue ? Colors.red : null,
+          backgroundColor: widget.sValue ?Color(0xFFFF0000): null,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -100,6 +99,9 @@ class _SettingsState extends State<Settings> {
                                                 style: TextStyle(fontSize: 23),
                                               ),
                                               const Text("Copying is not supported"),
+                                              CupertinoButton(child: Text("close"), onPressed: (){
+                                                Navigator.of(context).pop();
+                                              })
                                             ],
                                           )
                                         ],
